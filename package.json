@@ -2,7 +2,7 @@
   "name": "vscode-command-button",
   "displayName": "Command Button",
   "description": "Adds a customizable button to the status bar that can be bound to any command",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/devintegeritsm/vscode-command-button.git"
@@ -25,21 +25,36 @@
         "title": "Command Button: Configure Button Command"
       },
       {
+        "command": "commandButton.setTask",
+        "title": "Command Button: Configure Button Task"
+      },
+      {
         "command": "commandButton.refresh",
         "title": "Command Button: Refresh Button"
       },
       {
         "command": "commandButton.execute",
-        "title": "Command Button: Execute Bound Command"
+        "title": "Command Button: Execute Bound Action"
       }
     ],
     "configuration": {
       "title": "Command Button",
       "properties": {
+        "commandButton.actionType": {
+          "type": "string",
+          "enum": ["command", "task"],
+          "default": "command",
+          "description": "Type of action to perform when the button is clicked"
+        },
         "commandButton.command": {
           "type": "string",
           "default": "",
-          "description": "Command to execute when the button is clicked"
+          "description": "Command to execute when the button is clicked (when actionType is 'command')"
+        },
+        "commandButton.taskName": {
+          "type": "string",
+          "default": "",
+          "description": "Task to run when the button is clicked (when actionType is 'task')"
         },
         "commandButton.text": {
           "type": "string",
