@@ -84,6 +84,16 @@ npm run compile
 npx vsce package
 ```
 
+or
+
+```bash
+npm install --save-dev @types/vscode@1.60.0 typescript
+npx tsc -p ./
+npx @vscode/vsce package
+```
+
 ## License
 
 MIT
+
+

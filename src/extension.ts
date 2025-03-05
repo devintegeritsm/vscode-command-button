@@ -18,10 +18,17 @@ export function activate(context: vscode.ExtensionContext) {
     });
     
     // Register the execute command to run the bound command
-    let executeCommand = vscode.commands.registerCommand('commandButton.execute', () => {
+    let executeCommand = vscode.commands.registerCommand('commandButton.execute', async () => {
         const command = vscode.workspace.getConfiguration('commandButton').get<string>('command');
         if (command) {
-            vscode.commands.executeCommand(command);
+            const ar = command.split(':');
+            if (ar && ar.length>1 && ar[0].toLowerCase() == "task") {
+                const tasks = await vscode.tasks.fetchTasks();
+                const myTask = tasks.find(t => t.name === ar[1]);
+                if (myTask) vscode.tasks.executeTask(myTask);
+            } else {
+                vscode.commands.executeCommand(command);
+            }
         } else {
             vscode.window.showInformationMessage('No command bound to the button. Use settings to configure.');
         }
@@ -29,7 +36,8 @@ export function activate(context: vscode.ExtensionContext) {
     
     // Register the set command to interactively choose a command
     let setCommand = vscode.commands.registerCommand('commandButton.setCommand', async () => {
-        const commands = await vscode.commands.getCommands(true);
+        // const commands = await vscode.commands.getCommands(true);
+        const commands = await vscode.commands.getCommands();
         // Filter out some internal commands
         const filteredCommands = commands.filter(cmd => 
             !cmd.startsWith('_') && 

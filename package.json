@@ -2,7 +2,7 @@
   "name": "vscode-command-button",
   "displayName": "Command Button",
   "description": "Adds a customizable button to the status bar that can be bound to any command",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/devintegeritsm/vscode-command-button.git"
